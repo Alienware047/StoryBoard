@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { Menu, X, Moon, Sun, Laptop, Search } from "lucide-react";
-import { useSearch } from "../context/SearchProvider";
+import { useSearch } from "../app/(sites)/context/SearchProvider";
 
 export default function Navbar() {
   const [theme, setTheme] = useState<"light" | "dark" | "system">("system");

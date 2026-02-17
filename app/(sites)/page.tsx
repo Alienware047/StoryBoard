@@ -1,9 +1,9 @@
 "use client";
 
-import HeroSection from './components/HeroSection';
-import StoryCard from './components/StoryCard';
-import stories from "../public/lib/stories.json";
-import CategorySlider from './components/CategorySlider';
+import HeroSection from '../../components/HeroSection';
+import StoryCard from '../../components/StoryCard';
+import stories from "../../public/lib/stories.json";
+import CategorySlider from '../../components/CategorySlider';
 import { useState } from "react";
 
 export default function Home() {

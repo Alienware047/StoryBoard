@@ -3,9 +3,9 @@
 import { useState, useEffect } from "react";
 import "./globals.css";
 import { Inter, Roboto_Mono } from "next/font/google";
-import Navbar from "./components/Navbar";
-import Footer from "./components/Footer";
-import { SearchProvider } from "./context/SearchProvider";
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
+import { SearchProvider } from "./(sites)/context/SearchProvider";
 
 const geistSans = Inter({ subsets: ["latin"], variable: "--font-geist-sans" });
 const geistMono = Roboto_Mono({ subsets: ["latin"], variable: "--font-geist-mono" });
@@ -39,9 +39,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-white text-gray-900 dark:bg-gray-950 dark:text-gray-100 transition-colors duration-300`}
       >
         <SearchProvider>
-          <Navbar/>
+          
           {children}
-          <Footer/>
+          
         </SearchProvider>
       </body>
     </html>

@@ -5,9 +5,9 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowLeft } from "lucide-react";
 import { useEffect, useState } from "react";
-import Navbar from "../../components/Navbar";
-import StoryCard from "../../components/StoryCard";
-import stories from "../../../public/lib/stories.json";
+import Navbar from "../../../../components/Navbar";
+import StoryCard from "../../../../components/StoryCard";
+import stories from "../../../../public/lib/stories.json";
 
 export default function CategoryStoriesPage() {
   const { category } = useParams();

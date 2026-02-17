@@ -1,11 +1,12 @@
 "use client";
 
-import { useState, useEffect, useMemo } from "react";
-import Navbar from "../components/Navbar";
-import StoryCard from "../components/StoryCard";
-import CategorySlider from "../components/CategorySlider";
-import stories from "../../public/lib/stories.json";
-import { useSearch } from "../context/SearchProvider"; // ✅ correct import
+import { useState, useEffect, useMemo } from 'react'
+import Navbar from '@/components/Navbar'
+import StoryCard from '@/components/StoryCard'
+import CategorySlider from '@/components/CategorySlider'
+import stories from '@/lib/stories'
+import type { Story } from '@/types/story'
+import { useSearch } from '../context/SearchProvider'
 
 export default function StoriesPage() {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
@@ -13,20 +14,22 @@ export default function StoriesPage() {
   const { query } = useSearch(); // ✅ use global search query
 
   // ✅ Filter by category + global search
-  const filteredStories = useMemo(() => {
+  const filteredStories = useMemo<Story[]>(() => {
     return stories.filter((story) => {
       const matchesCategory = selectedCategory
         ? story.category?.toLowerCase() === selectedCategory.toLowerCase()
-        : true;
+        : true
 
+      const q = query.trim().toLowerCase()
       const matchesSearch =
-        story.title?.toLowerCase().includes(query.toLowerCase()) ||
-        story.author?.toLowerCase().includes(query.toLowerCase()) ||
-        story.description?.toLowerCase().includes(query.toLowerCase());
+        q === '' ||
+        story.title?.toLowerCase().includes(q) ||
+        story.author?.toLowerCase().includes(q) ||
+        story.description?.toLowerCase().includes(q)
 
-      return matchesCategory && matchesSearch;
-    });
-  }, [selectedCategory, query]);
+      return matchesCategory && matchesSearch
+    })
+  }, [selectedCategory, query])
 
   // ✅ Infinite scroll
   useEffect(() => {

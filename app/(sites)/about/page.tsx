@@ -1,12 +1,16 @@
 "use client";
 
-import { motion } from "framer-motion";
-import Image from "next/image";
-import Link from "next/link";
-import { Users, Heart, Sparkles, BookOpen } from "lucide-react";
-import Navbar from "../components/Navbar";
+import { motion } from 'framer-motion'
+import Image from 'next/image'
+import Link from 'next/link'
+import { Users, Heart, Sparkles, BookOpen } from 'lucide-react'
+import Navbar from '@/components/Navbar'
+import aboutData from '@/lib/about'
+import type { AboutData } from '@/types/aboutdata'
 
 export default function AboutPage() {
+  const data: AboutData = aboutData
+
   return (
     <main className="min-h-screen bg-gray-50 dark:bg-gray-950 text-gray-900 dark:text-gray-100 flex flex-col">
       <Navbar />
@@ -20,7 +24,7 @@ export default function AboutPage() {
           className="text-4xl md:text-5xl font-bold mb-4 flex justify-center items-center gap-2"
         >
           <Sparkles className="w-8 h-8 text-blue-500 animate-spin-slow" />
-          About StoryBoard
+          {data.title}
         </motion.h1>
         <motion.p
           initial={{ opacity: 0 }}
@@ -28,8 +32,7 @@ export default function AboutPage() {
           transition={{ delay: 0.3, duration: 0.6 }}
           className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto"
         >
-          StoryBoard is a creative platform built to inspire readers and writers
-          across the globe — a place where imagination takes center stage.
+          {data.description}
         </motion.p>
       </section>
 
@@ -41,8 +44,8 @@ export default function AboutPage() {
         className="relative w-full max-w-5xl mx-auto my-12 rounded-3xl overflow-hidden shadow-lg"
       >
         <Image
-          src="/images/about-hero.jpg"
-          alt="StoryBoard creative platform"
+          src={data.heroImage}
+          alt={data.title}
           width={1200}
           height={600}
           className="object-cover w-full h-80 md:h-[28rem]"
@@ -58,14 +61,9 @@ export default function AboutPage() {
           transition={{ duration: 0.6 }}
         >
           <h2 className="text-3xl font-bold mb-3 flex items-center gap-2">
-            <Heart className="text-pink-500 w-7 h-7" /> Our Mission
+            <Heart className="text-pink-500 w-7 h-7" /> {data.mission.heading}
           </h2>
-          <p className="text-gray-600 dark:text-gray-400 leading-relaxed">
-            We believe that stories have the power to connect, heal, and inspire.
-            StoryBoard is designed to empower storytellers — providing tools and
-            an audience for everyone with a story to tell, no matter who they are
-            or where they come from.
-          </p>
+          <p className="text-gray-600 dark:text-gray-400 leading-relaxed">{data.mission.body}</p>
         </motion.div>
 
         <motion.div
@@ -74,8 +72,8 @@ export default function AboutPage() {
           transition={{ delay: 0.2, duration: 0.6 }}
         >
           <Image
-            src="/images/mission.jpg"
-            alt="Our Mission"
+            src={data.mission.image}
+            alt={data.mission.heading}
             width={600}
             height={400}
             className="rounded-2xl shadow-md object-cover"
@@ -91,37 +89,24 @@ export default function AboutPage() {
           </h2>
 
           <div className="grid md:grid-cols-3 gap-8">
-            {[
-              {
-                icon: <Users className="w-8 h-8 text-indigo-500" />,
-                title: "Community",
-                desc: "We foster a space where readers and writers can connect, share, and grow together.",
-              },
-              {
-                icon: <Heart className="w-8 h-8 text-pink-500" />,
-                title: "Creativity",
-                desc: "Imagination drives us. We celebrate creative freedom and the art of storytelling.",
-              },
-              {
-                icon: <Sparkles className="w-8 h-8 text-yellow-500" />,
-                title: "Inspiration",
-                desc: "We aim to spark new ideas and ignite passion through stories from every corner of the world.",
-              },
-            ].map((val, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: i * 0.2, duration: 0.5 }}
-                className="p-6 rounded-2xl shadow-md bg-gray-50 dark:bg-gray-800/50 backdrop-blur-sm hover:scale-105 transition-all duration-500"
-              >
-                <div className="flex justify-center mb-4">{val.icon}</div>
-                <h3 className="text-xl font-semibold mb-2">{val.title}</h3>
-                <p className="text-gray-600 dark:text-gray-400 text-sm">
-                  {val.desc}
-                </p>
-              </motion.div>
-            ))}
+            {data.values.map((val, i) => {
+              const Icon = val.id === 'community' ? Users : val.id === 'creativity' ? Heart : Sparkles
+              return (
+                <motion.div
+                  key={val.id}
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: i * 0.2, duration: 0.5 }}
+                  className="p-6 rounded-2xl shadow-md bg-gray-50 dark:bg-gray-800/50 backdrop-blur-sm hover:scale-105 transition-all duration-500"
+                >
+                  <div className="flex justify-center mb-4">
+                    <Icon className="w-8 h-8 text-indigo-500" />
+                  </div>
+                  <h3 className="text-xl font-semibold mb-2">{val.title}</h3>
+                  <p className="text-gray-600 dark:text-gray-400 text-sm">{val.desc}</p>
+                </motion.div>
+              )
+            })}
           </div>
         </div>
       </section>
@@ -134,7 +119,7 @@ export default function AboutPage() {
           transition={{ duration: 0.6 }}
           className="text-3xl font-bold mb-4"
         >
-          Ready to Discover or Share Stories?
+          {data.cta.heading}
         </motion.h2>
         <motion.div
           initial={{ scale: 0.9, opacity: 0 }}
@@ -142,13 +127,13 @@ export default function AboutPage() {
           transition={{ delay: 0.3, duration: 0.6 }}
         >
           <Link
-            href="/categories"
+            href={data.cta.actionHref}
             className="inline-block px-6 py-3 bg-blue-600 text-white rounded-full font-semibold hover:bg-blue-700 transition-colors duration-300"
           >
-            Explore Categories
+            {data.cta.actionLabel}
           </Link>
         </motion.div>
       </section>
     </main>
-  );
+  )
 }

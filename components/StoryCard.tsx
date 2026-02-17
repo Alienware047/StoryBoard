@@ -1,19 +1,20 @@
-"use client";
+"use client"
 
-import Image from "next/image";
-import Link from "next/link";
-import { BookOpen } from "lucide-react";
-import { useState } from "react";
-import clsx from "clsx";
+import Image from 'next/image'
+import Link from 'next/link'
+import { BookOpen } from 'lucide-react'
+import { useState } from 'react'
+import clsx from 'clsx'
+import type { Story } from '@/types/story'
 
 interface StoryCardProps {
-  id: string;
-  title: string;
-  author: string;
-  description: string;
-  coverUrl: string;
-  category?: string;
-  isLoading?: boolean; // ✅ optional loading flag
+  id: string
+  title?: string
+  author?: string
+  description?: string
+  coverUrl?: string
+  category?: string
+  isLoading?: boolean
 }
 
 export default function StoryCard({
@@ -25,7 +26,7 @@ export default function StoryCard({
   category,
   isLoading = false,
 }: StoryCardProps) {
-  const [imageLoaded, setImageLoaded] = useState(false);
+  const [imageLoaded, setImageLoaded] = useState(false)
 
   return (
     <Link
@@ -42,14 +43,14 @@ export default function StoryCard({
         )}
         {!isLoading && (
           <Image
-            src={coverUrl}
-            alt={title}
+            src={coverUrl ?? '/images/default-story.jpg'}
+            alt={title ?? 'Story cover'}
             fill
             className={clsx(
-              "object-cover transition-transform duration-300 group-hover:scale-105",
-              !imageLoaded && "opacity-0"
+              'object-cover transition-transform duration-300 group-hover:scale-105',
+              !imageLoaded && 'opacity-0'
             )}
-            onLoad={() => setImageLoaded(true)}
+            onLoadingComplete={() => setImageLoaded(true)}
           />
         )}
 
@@ -73,14 +74,10 @@ export default function StoryCard({
         ) : (
           <>
             <h3 className="text-lg font-semibold text-gray-900 dark:text-white line-clamp-1">
-              {title}
+              {title ?? 'Untitled Story'}
             </h3>
-            <p className="text-sm text-gray-500 dark:text-gray-400 mb-2">
-              by {author}
-            </p>
-            <p className="text-sm text-gray-700 dark:text-gray-300 line-clamp-3 mb-4">
-              {description}
-            </p>
+            <p className="text-sm text-gray-500 dark:text-gray-400 mb-2">by {author ?? 'Unknown'}</p>
+            <p className="text-sm text-gray-700 dark:text-gray-300 line-clamp-3 mb-4">{description ?? ''}</p>
             <div className="flex items-center gap-2 text-sm font-medium text-blue-600 dark:text-blue-400">
               <BookOpen className="w-4 h-4" />
               <span>Read Story</span>
