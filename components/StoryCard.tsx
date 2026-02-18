@@ -1,20 +1,19 @@
-"use client"
+'use client';
 
-import Image from 'next/image'
-import Link from 'next/link'
-import { BookOpen } from 'lucide-react'
-import { useState } from 'react'
-import clsx from 'clsx'
-import type { Story } from '@/types/story'
+import Image from 'next/image';
+import Link from 'next/link';
+import { BookOpen } from 'lucide-react';
+import { useState } from 'react';
+import clsx from 'clsx';
 
 interface StoryCardProps {
-  id: string
-  title?: string
-  author?: string
-  description?: string
-  coverUrl?: string
-  category?: string
-  isLoading?: boolean
+  id: string;
+  title?: string;
+  author?: string;
+  description?: string;
+  coverUrl?: string;
+  category?: string;
+  isLoading?: boolean;
 }
 
 export default function StoryCard({
@@ -26,14 +25,14 @@ export default function StoryCard({
   category,
   isLoading = false,
 }: StoryCardProps) {
-  const [imageLoaded, setImageLoaded] = useState(false)
+  const [imageLoaded, setImageLoaded] = useState(false);
 
   return (
     <Link
       href={`/story/${id}`}
       className={clsx(
-        "group relative block w-full bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300",
-        isLoading && "pointer-events-none"
+        'group relative block w-full bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300',
+        isLoading && 'pointer-events-none',
       )}
     >
       {/* ✅ Image section with shimmer */}
@@ -48,7 +47,7 @@ export default function StoryCard({
             fill
             className={clsx(
               'object-cover transition-transform duration-300 group-hover:scale-105',
-              !imageLoaded && 'opacity-0'
+              !imageLoaded && 'opacity-0',
             )}
             onLoadingComplete={() => setImageLoaded(true)}
           />
@@ -76,8 +75,12 @@ export default function StoryCard({
             <h3 className="text-lg font-semibold text-gray-900 dark:text-white line-clamp-1">
               {title ?? 'Untitled Story'}
             </h3>
-            <p className="text-sm text-gray-500 dark:text-gray-400 mb-2">by {author ?? 'Unknown'}</p>
-            <p className="text-sm text-gray-700 dark:text-gray-300 line-clamp-3 mb-4">{description ?? ''}</p>
+            <p className="text-sm text-gray-500 dark:text-gray-400 mb-2">
+              by {author ?? 'Unknown'}
+            </p>
+            <p className="text-sm text-gray-700 dark:text-gray-300 line-clamp-3 mb-4">
+              {description ?? ''}
+            </p>
             <div className="flex items-center gap-2 text-sm font-medium text-blue-600 dark:text-blue-400">
               <BookOpen className="w-4 h-4" />
               <span>Read Story</span>

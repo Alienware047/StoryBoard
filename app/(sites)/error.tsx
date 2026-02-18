@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
-import { motion } from "framer-motion";
-import Link from "next/link";
-import { useEffect } from "react";
-import { AlertTriangle } from "lucide-react";
+import { motion } from 'framer-motion';
+import Link from 'next/link';
+import { useEffect } from 'react';
+import { AlertTriangle } from 'lucide-react';
 
 export default function ErrorPage({
   error,
@@ -13,7 +13,7 @@ export default function ErrorPage({
   reset: () => void;
 }) {
   useEffect(() => {
-    console.error("App Error:", error);
+    console.error('App Error:', error);
   }, [error]);
 
   return (
@@ -34,7 +34,8 @@ export default function ErrorPage({
 
         <h1 className="text-5xl font-bold mb-2">Oops! Something went wrong</h1>
         <p className="text-gray-300 max-w-lg mb-8">
-          We encountered an unexpected error while loading this page. You can try refreshing, or return home.
+          We encountered an unexpected error while loading this page. You can try refreshing, or
+          return home.
         </p>
 
         <div className="flex gap-4">

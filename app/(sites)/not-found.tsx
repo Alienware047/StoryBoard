@@ -1,9 +1,8 @@
-"use client";
+'use client';
 
-import { motion } from "framer-motion";
-import Link from "next/link";
-import { SearchX } from "lucide-react";
-
+import { motion } from 'framer-motion';
+import Link from 'next/link';
+import { SearchX } from 'lucide-react';
 
 export default function NotFound() {
   return (
@@ -29,12 +28,10 @@ export default function NotFound() {
             </div>
           </motion.div>
 
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">
-            Oops! Page Not Found
-          </h1>
+          <h1 className="text-4xl md:text-5xl font-bold mb-4">Oops! Page Not Found</h1>
           <p className="text-gray-600 dark:text-gray-400 mb-8 leading-relaxed">
-            The page you’re trying to access doesn’t exist or has been moved.  
-            Don’t worry — you can head back and explore more amazing stories.
+            The page you’re trying to access doesn’t exist or has been moved. Don’t worry — you can
+            head back and explore more amazing stories.
           </p>
 
           <Link

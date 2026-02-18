@@ -1,9 +1,10 @@
-import Link from 'next/link'
-import { motion } from 'framer-motion'
-import { BookOpen, Sparkles } from 'lucide-react'
-import Navbar from '@/components/Navbar'
-import stories, { getCategories } from '@/lib/stories'
-import type { Story } from '@/types/story'
+'use client';
+
+import Link from 'next/link';
+import { motion } from 'framer-motion';
+import { BookOpen, Sparkles } from 'lucide-react';
+import Navbar from '@/components/Navbar';
+import stories, { getCategories } from '@/lib/stories';
 
 // 🖼️ Optional: define background images for each category
 const categoryImages: Record<string, string> = {
@@ -15,11 +16,11 @@ const categoryImages: Record<string, string> = {
   'Sci-Fi': '/images/scifi.jpg',
   'African Tales': '/images/african.jpg',
   History: '/images/history.jpg',
-}
+};
 
 export default function CategoriesPage() {
   // server-side: compute categories from typed stories
-  const categories = getCategories()
+  const categories = getCategories();
 
   return (
     <main className="min-h-screen bg-gray-50 dark:bg-gray-950 text-gray-900 dark:text-gray-100 flex flex-col">
@@ -31,7 +32,9 @@ export default function CategoriesPage() {
           <Sparkles className="w-6 h-6 text-blue-500 animate-spin-slow" />
           Explore Categories
         </h1>
-        <p className="text-gray-600 dark:text-gray-400">Browse through all story genres and find your next read.</p>
+        <p className="text-gray-600 dark:text-gray-400">
+          Browse through all story genres and find your next read.
+        </p>
       </header>
 
       {/* Categories Grid */}
@@ -48,7 +51,7 @@ export default function CategoriesPage() {
           `}
         >
           {categories.map((category, i) => {
-            const bgImage = categoryImages[category] || '/images/default.jpg'
+            const bgImage = categoryImages[category] || '/images/default.jpg';
 
             return (
               <motion.div
@@ -59,7 +62,10 @@ export default function CategoriesPage() {
                 whileHover={{ scale: 1.05 }}
                 className="w-full h-44 rounded-2xl overflow-hidden shadow-lg group relative"
               >
-                <Link href={`/categories/${encodeURIComponent(category)}`} className="block w-full h-full relative">
+                <Link
+                  href={`/categories/${encodeURIComponent(category)}`}
+                  className="block w-full h-full relative"
+                >
                   {/* Background image */}
                   <div
                     className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
@@ -78,10 +84,10 @@ export default function CategoriesPage() {
                   </div>
                 </Link>
               </motion.div>
-            )
+            );
           })}
         </div>
       </section>
     </main>
-  )
+  );
 }

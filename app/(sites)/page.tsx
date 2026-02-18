@@ -1,20 +1,33 @@
-"use client";
+'use client';
 
 import HeroSection from '../../components/HeroSection';
 import StoryCard from '../../components/StoryCard';
-import stories from "../../public/lib/stories.json";
+import stories from '../../public/lib/stories.json';
 import CategorySlider from '../../components/CategorySlider';
-import { useState } from "react";
+import { useState, useMemo } from 'react';
+import { useSearch } from './context/SearchProvider';
+import type { Story } from '@/types/story';
 
 export default function Home() {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+  const { query } = useSearch();
 
-  const filteredStories = selectedCategory
-    ? stories.filter(
-        (story) =>
-          story.category?.toLowerCase() === selectedCategory.toLowerCase()
-      )
-    : stories;
+  const filteredStories = useMemo<Story[]>(() => {
+    return stories.filter((story) => {
+      const matchesCategory = selectedCategory
+        ? story.category?.toLowerCase() === selectedCategory.toLowerCase()
+        : true;
+
+      const q = query.trim().toLowerCase();
+      const matchesSearch =
+        q === '' ||
+        story.title?.toLowerCase().includes(q) ||
+        story.author?.toLowerCase().includes(q) ||
+        story.description?.toLowerCase().includes(q);
+
+      return matchesCategory && matchesSearch;
+    });
+  }, [selectedCategory, query]);
 
   return (
     <main className="min-h-screen bg-background-light text-text-light dark:bg-background-dark dark:text-text-dark transition-colors duration-300">

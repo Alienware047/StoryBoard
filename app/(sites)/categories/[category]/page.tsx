@@ -1,13 +1,13 @@
-"use client";
+'use client';
 
-import { useParams } from "next/navigation";
-import Link from "next/link";
-import { motion } from "framer-motion";
-import { ArrowLeft } from "lucide-react";
-import { useEffect, useState } from "react";
-import Navbar from "../../../../components/Navbar";
-import StoryCard from "../../../../components/StoryCard";
-import stories from "../../../../public/lib/stories.json";
+import { useParams } from 'next/navigation';
+import Link from 'next/link';
+import { motion } from 'framer-motion';
+import { ArrowLeft } from 'lucide-react';
+import { useEffect, useState } from 'react';
+
+import StoryCard from '../../../../components/StoryCard';
+import stories from '../../../../public/lib/stories.json';
 
 export default function CategoryStoriesPage() {
   const { category } = useParams();
@@ -20,8 +20,7 @@ export default function CategoryStoriesPage() {
     setIsLoading(true);
     const timer = setTimeout(() => {
       const filtered = stories.filter(
-        (story) =>
-          story.category?.toLowerCase() === decodedCategory.toLowerCase()
+        (story) => story.category?.toLowerCase() === decodedCategory.toLowerCase(),
       );
       setFilteredStories(filtered);
       setIsLoading(false);
@@ -32,7 +31,6 @@ export default function CategoryStoriesPage() {
 
   return (
     <main className="min-h-screen bg-gray-50 dark:bg-gray-950 text-gray-900 dark:text-gray-100 flex flex-col">
-
       {/* Header */}
       <header className="max-w-7xl mx-auto w-full px-6 lg:px-10 mt-24 mb-8 text-center">
         <Link
@@ -41,9 +39,7 @@ export default function CategoryStoriesPage() {
         >
           <ArrowLeft className="w-5 h-5" /> Back to Categories
         </Link>
-        <h1 className="text-3xl md:text-4xl font-bold mb-2 capitalize">
-          {decodedCategory}
-        </h1>
+        <h1 className="text-3xl md:text-4xl font-bold mb-2 capitalize">{decodedCategory}</h1>
         <p className="text-gray-600 dark:text-gray-400">
           Discover stories in the {decodedCategory} category
         </p>
